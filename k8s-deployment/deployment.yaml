@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  # The name of the deployment.
+  name: dotnet-deploy
+  labels:
+    app: dotnet-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dotnet-deploy
+  template:
+    metadata:
+      labels:
+        app: dotnet-deploy
+    spec:
+      containers:
+      - name: dotnet-server
+        image: docker.io/jianzhiteh/test-dotnet:latest
+        ports:
+        - containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: dotnet-deploy
+spec:
+  selector:
+    app: dotnet-deploy
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
