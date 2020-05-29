@@ -2,34 +2,40 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   # The name of the deployment.
-  name: dotnet-deploy
+  name: {{ .Release.Name }}-dotnet-deploy
   labels:
-    app: dotnet-deploy
+    app: {{ .Release.Name }}-dotnet-deploy
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: dotnet-deploy
+      app: {{ .Release.Name }}-dotnet-deploy
   template:
     metadata:
       labels:
-        app: dotnet-deploy
+        app: {{ .Release.Name }}-dotnet-deploy
     spec:
       containers:
       - name: dotnet-server
         image: docker.io/jianzhiteh/test-dotnet:latest
         ports:
         - containerPort: 80
-
+        volumeMounts:
+          - mountPath: /config
+            name: config-volume
+      volumes:
+      - name: config-volume
+        configMap:
+          name: {{ .Release.Name }}-configmap
 ---
 
 apiVersion: v1
 kind: Service
 metadata:
-  name: dotnet-deploy
+  name: {{ .Release.Name }}-dotnet-deploy
 spec:
   selector:
-    app: dotnet-deploy
+    app: {{ .Release.Name }}-dotnet-deploy
   ports:
     - protocol: TCP
       port: 80
