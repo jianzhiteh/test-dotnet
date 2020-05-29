@@ -27,9 +27,9 @@ namespace test_mvc.Controllers
             return _options.Value.TestValue1;
         }
 
-        public IActionResult Privacy()
+        public string Env(string variable)
         {
-            return View();
+            return Environment.GetEnvironmentVariable(variable);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
