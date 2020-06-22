@@ -24,12 +24,7 @@ namespace test_mvc.Controllers
 
         public string Index()
         {
-            return _options.Value.TestValue1;
-        }
-
-        public string Env(string variable)
-        {
-            return Environment.GetEnvironmentVariable(variable);
+            return "Version is "+ GetType().Assembly.GetName().Version.ToString();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

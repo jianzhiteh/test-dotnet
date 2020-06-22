@@ -17,12 +17,13 @@ spec:
     spec:
       containers:
       - name: dotnet-server
-        image: docker.io/jianzhiteh/test-dotnet:latest
+        image: docker.io/jianzhiteh/test-mvc:testtest
         ports:
         - containerPort: 80
         volumeMounts:
-          - mountPath: /config
+          - mountPath: /app/appsettings2.json
             name: config-volume
+            subPath: appsettings2.json
       volumes:
       - name: config-volume
         configMap:

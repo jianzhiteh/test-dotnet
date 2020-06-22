@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-configmap
 data:
-  test-mvc.deps.json: {{ .Files.Get "appsettings/appsettings.json" | quote }}
+  appsettings2.json: {{ .Files.Get "appsettings/appsettings.json" | quote }}
