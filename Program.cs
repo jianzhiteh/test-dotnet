@@ -25,6 +25,10 @@ namespace test_mvc
                 .ConfigureAppConfiguration(c =>
                 {
                     c.AddJsonFile("/config/appsettings.json", optional: true, reloadOnChange: true);
+                })
+                .ConfigureLogging(config =>
+                {
+                  config.ClearProviders();
                 });
     }
 }

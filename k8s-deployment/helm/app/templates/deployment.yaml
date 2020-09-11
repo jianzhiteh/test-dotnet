@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: dotnet-server
-        image: docker.io/jianzhiteh/test-mvc:testtest
+        image: docker.io/jianzhiteh/test-mvc:latest
         ports:
         - containerPort: 80
         volumeMounts:
