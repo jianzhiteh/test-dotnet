@@ -26,10 +26,7 @@ namespace test_mvc.Controllers
 
     public string Index()
     {
-      _logger.LogInformation("Test Information");
-      _logger.LogWarning("Test Warning");
-      _logger.LogError("Test Error");
-      _logger.LogCritical("Test Critical");
+      _logger.LogInformation("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo eos cumque sint maxime voluptate perspiciatis libero provident harum quia at ipsum commodi, nesciunt reiciendis quisquam unde eum. \nNihil eveniet voluptatum iste quibusdam at itaque, laborum natus, beatae perferendis debitis illo, ipsum nisi. \nRerum eveniet magnam harum! Voluptatibus quos fugiat blanditiis voluptates, totam reprehenderit delectus recusandae, a ipsam ad cumque temporibus veritatis non, dolorem accusantium mollitia beatae ipsum placeat expedita modi rem inventore officia!\nEius libero culpa nulla ea esse accusantium dicta, error possimus illo earum ipsum quisquam inventore sit ipsam repellendus.Enim, quos hic commodi officiis ipsa quisquam consectetur earum.");
       return "Version is " + GetType().Assembly.GetName().Version.ToString();
     }
 
