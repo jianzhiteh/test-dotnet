@@ -22,13 +22,13 @@ namespace test_mvc
                 {
                     webBuilder.UseStartup<Startup>();
                 })
-                .ConfigureAppConfiguration(c =>
-                {
-                    c.AddJsonFile("/config/appsettings.json", optional: true, reloadOnChange: true);
-                })
                 .ConfigureLogging(config =>
                 {
                   config.ClearProviders();
                 });
+                // .ConfigureAppConfiguration(c =>
+                // {
+                //     c.AddJsonFile("/config/appsettings.json", optional: true, reloadOnChange: true);
+                // })
     }
 }
