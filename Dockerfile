@@ -7,4 +7,5 @@ RUN dotnet publish /p:Version=$BUILD_VERSION --self-contained -c Release -o publ
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /app
 COPY --from=builder ./app/published .
+COPY ./logs ./logs
 ENTRYPOINT ["dotnet", "test-mvc.dll"]

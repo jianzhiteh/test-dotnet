@@ -20,10 +20,13 @@ spec:
         image: docker.io/jianzhiteh/test-mvc:latest
         ports:
         - containerPort: 80
-        volumeMounts:
-          - mountPath: /app/appsettings2.json
-            name: config-volume
-            subPath: appsettings2.json
+        # volumeMounts:
+        #   - mountPath: /app/appsettings2.json
+        #     name: config-volume
+        #     subPath: appsettings2.json
+        env:
+        - name: TEH_DEPLOYMENT
+          value: "Hello_from_the_environment"
       volumes:
       - name: config-volume
         configMap:
