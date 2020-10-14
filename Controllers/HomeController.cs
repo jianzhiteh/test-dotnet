@@ -10,30 +10,50 @@ using test_mvc.Models;
 using test_mvc.Helpers;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace test_mvc.Controllers
 {
-  public class HomeController : Controller
-  {
-    private readonly ILogger<HomeController> _logger;
-    private readonly IOptions<AppSetting> _options;
-
-    public HomeController(ILogger<HomeController> logger, IOptions<AppSetting> options)
+    public class HomeController : Controller
     {
-      _logger = logger;
-      _options = options;
-    }
+        private readonly ILogger<HomeController> _logger;
+        private readonly IOptions<AppSetting> _options;
+        private readonly IHostingEnvironment _hostingEnvironment;
 
-    public string Index()
-    {
-      _logger.LogInformation("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo eos cumque sint maxime voluptate perspiciatis libero provident harum quia at ipsum commodi, nesciunt reiciendis quisquam unde eum. \nNihil eveniet voluptatum iste quibusdam at itaque, laborum natus, beatae perferendis debitis illo, ipsum nisi. \nRerum eveniet magnam harum! Voluptatibus quos fugiat blanditiis voluptates, totam reprehenderit delectus recusandae, a ipsam ad cumque temporibus veritatis non, dolorem accusantium mollitia beatae ipsum placeat expedita modi rem inventore officia!\nEius libero culpa nulla ea esse accusantium dicta, error possimus illo earum ipsum quisquam inventore sit ipsam repellendus.Enim, quos hic commodi officiis ipsa quisquam consectetur earum.");
-      return "Version is " + GetType().Assembly.GetName().Version.ToString();
-    }
+        public HomeController(ILogger<HomeController> logger, IOptions<AppSetting> options, IHostingEnvironment hostingEnvironment)
+        {
+            _logger = logger;
+            _options = options;
+            _hostingEnvironment = hostingEnvironment;
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-      return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("Index")]
+        public ActionResult Index2(string hello)
+        {
+            string projectRootPath = _hostingEnvironment.ContentRootPath;
+
+            var path = Path.Join(projectRootPath, "logs", "log20201014.txt");
+
+            using (TextWriter tw = new StreamWriter(path,true))
+            {
+                tw.WriteLine(hello);
+            }
+
+            return View("Index");
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
     }
-  }
 }
